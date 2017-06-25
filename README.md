@@ -1,8 +1,12 @@
-gf.TreeLayer.js
+gf.Map.DrawingManager.js
 ===========
 
-**A jQuery plugin to generate hierarchy layer list** 
+**A jQuery plugin which wrap Google Map drawing manager ** 
 
+Dependencies
+--------
+1. jQuery
+2. Google Map Javascript API
 
 How to Use
 --------
@@ -11,32 +15,16 @@ How to Use
 ```
 
 ```js
-$('#myDiv').gfTreeLayer(settings);
-```
+var map = new google.maps.Map(...);
 
-Settings
---------
-```js
-{
-    arrData: slayer.arrData,    
-    nameField: 'name',
-    filterable: true,
-    searchable: true,
-    collapsible: false,
-    hideable: false,
-    openAll: true,   
-    numFormat: { mode: [0] },             
-    css: {
-        'titleBackgroundColor': '#FF6600',
-        'width': '250px',
-        'height': '250px'
-    }
-}
+$('#myDiv').gfMapDrawingManager({
+    targetMap: map    
+});
 ```
 
 Documentation
 -------------
-[gfmap.js API Developer Guide](module-MYAPP.html)
+
 
 
 Compatibility
