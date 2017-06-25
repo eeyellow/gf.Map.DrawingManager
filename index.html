@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./node_modules/admin-lte/bootstrap/css/bootstrap.min.css">
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzV-NzIbe9Lkk7GOKZ50WG7vhxR7qVt0&libraries=drawing"></script>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="container_drawingmanager"></div>
+    <script>
+        var map;
+        var myDrawingManager;
+        $(function () {
+
+            if ($.cachedScript == undefined) {
+                $.cachedScript = function (url, options) {
+                    // Allow user to set any option except for dataType, cache, and url
+                    options = $.extend(options || {}, {
+                        dataType: "script",
+                        cache: true,
+                        url: url
+                    });
+                    // Use $.ajax() since it is more flexible than $.getScript
+                    // Return the jqXHR object so we can chain callbacks
+                    return $.ajax(options);
+                };
+            }
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 23.98,
+                    lng: 120.98
+                },
+                zoom: 7
+            });
+
+            $.cachedScript("./src/gf.drawingManager.js").done(function () {                
+                myDrawingManager = $('#container_drawingmanager').gfMapDrawingManager({
+                    targetMap: map
+                });                
+            });
+        });
+
+    </script>
+</body>
+
+</html>
