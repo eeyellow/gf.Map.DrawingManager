@@ -478,6 +478,7 @@ Version
         },
 
         _getGeoJsonData: function() {
+            var oCom = this;
             oCom.options.targetMap.data.setStyle({
                 visible: false
             });
@@ -533,6 +534,7 @@ Version
         },
 
         _addGeoJsonData: function(featureCollection) {
+            var oCom = this;
             var featureCollectionArray = [];
             featureCollection.features.forEach(function(feature) {
                 switch (feature.geometry.type.toLowerCase()) {
