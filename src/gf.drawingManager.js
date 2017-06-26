@@ -215,6 +215,7 @@ Version
             google.maps.event.addListener(oCom.options.drawingManager, 'overlaycomplete', function(e) {
                 var newShape = e.overlay;
                 newShape.type = e.type;
+                newShape.id = oCom.options.shapeTempArr.length;
                 if (e.type !== google.maps.drawing.OverlayType.MARKER) {
                     // Switch back to non-drawing mode after drawing a shape.
                     //drawingManager._setDrawingMode(null);
@@ -251,7 +252,8 @@ Version
 
                 oCom.options.shapeTempArr.push({
                     shape: newShape,
-                    type: e.type
+                    type: e.type,
+                    id: oCom.options.shapeTempArr.length
                 });
             });
             
@@ -352,8 +354,12 @@ Version
             var oCom = this;
             
             oCom.options.shapeTempArr.forEach(function(ele){
-                ele.shape.setMap(null);
-                ele = null;
+                debugger;
+                if(ele != undefined)
+                {
+                    ele.shape.setMap(null);
+                    ele = null;
+                }
             });
             oCom.options.shapeTempArr = [];
             
@@ -390,11 +396,14 @@ Version
                 oCom.options.selectedShape.setMap(null);
             }
 
-            for (var i = 0; i < oCom._getShapeArr().length; i++) {
-                if (oCom._getShapeArr()[i] != undefined && oCom._getShapeArr()[i].id == oCom.options.selectedShape.id) {
-                    oCom._getShapeArr()[i] = null;
+            for (var i = 0; i < oCom.options.shapeTempArr.length; i++) {
+                debugger;
+                if (oCom.options.shapeTempArr[i] != undefined && oCom.options.shapeTempArr[i].id == oCom.options.selectedShape.id) {
+                    oCom.options.shapeTempArr[i] = null;
                 }
             }
+
+            
         },
 
         _selectColor: function(color) {
