@@ -683,6 +683,9 @@ Version
         this.addGeoJsonData = function(featureCollection){
             return drawingManager._addGeoJsonData(featureCollection);
         }
+        this.setDrawingMode = function(mode){
+            drawingManager._setDrawingMode(mode);
+        }
         return this;
     }
 
