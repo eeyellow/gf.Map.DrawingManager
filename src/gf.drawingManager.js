@@ -353,8 +353,7 @@ Version
         _clear: function(){
             var oCom = this;
             
-            oCom.options.shapeTempArr.forEach(function(ele){
-                debugger;
+            oCom.options.shapeTempArr.forEach(function(ele){                
                 if(ele != undefined)
                 {
                     ele.shape.setMap(null);
@@ -396,14 +395,11 @@ Version
                 oCom.options.selectedShape.setMap(null);
             }
 
-            for (var i = 0; i < oCom.options.shapeTempArr.length; i++) {
-                debugger;
+            for (var i = 0; i < oCom.options.shapeTempArr.length; i++) {                
                 if (oCom.options.shapeTempArr[i] != undefined && oCom.options.shapeTempArr[i].id == oCom.options.selectedShape.id) {
                     oCom.options.shapeTempArr[i] = null;
                 }
-            }
-
-            
+            }            
         },
 
         _selectColor: function(color) {
