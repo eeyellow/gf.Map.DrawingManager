@@ -348,6 +348,20 @@ Version
             }
         },
 
+        _clear: function(){
+            var oCom = this;
+            
+            oCom.options.shapeTempArr.forEach(function(ele){
+                ele.shape.setMap(null);
+                ele = null;
+            });
+            oCom.options.shapeTempArr = [];
+            
+            oCom.options.selectedShape = null;
+
+            oCom._setDrawingMode("null");
+        },
+
         _setSelection: function(shape) {
             var oCom = this;
             oCom._clearSelection();
@@ -685,6 +699,9 @@ Version
         }
         this.setDrawingMode = function(mode){
             drawingManager._setDrawingMode(mode);
+        }
+        this.clear = function(){
+            drawingManager._clear();
         }
         return this;
     }
