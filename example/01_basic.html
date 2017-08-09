@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        Test GF.Map.DrawingManager
+    </title>
+    <style>
+        #map {
+            height: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div id="drawingManager"></div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../src/gf.drawingManager.js"></script>
+    <script>
+        var map;
+        var drawingManager;
+        $(document).ready(function () {
+            /* 1 : Create Google Map Instance */
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 23.6,
+                    lng: 120.98
+                },
+                zoom: 8
+            });
+
+            drawingManager = $('#drawingManager').gfMapDrawingManager({
+                targetMap: map,
+                //mode: ["null", "marker", "polygon"],
+                css:{
+                    position: 'absolute',
+                    margin: 0,
+                    width: '185px',
+                    top: '10px',
+                    left: '10px'
+                },
+                iconContainerCss:{
+                    //'border-left': 'none',
+                    'padding': '7px',
+                    'width': 'auto',
+                    'height': 'auto',
+                }
+            });
+        });
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzV-NzIbe9Lkk7GOKZ50WG7vhxR7qVt0&libraries=drawing" defer></script>
+</body>
+
+</html>
