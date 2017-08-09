@@ -151,7 +151,7 @@ Version
                 .css(oCom.options.css);
             var html = "";
             oCom.options.btnArr.forEach(function(ele) {
-                if(oCom.options.mode.indexOf(ele.mode) >= 0){
+                if(oCom.options.mode == undefined || oCom.options.mode.indexOf(ele.mode) >= 0){
                     html +=
                     "<span data-drawmode='" + ele.mode + "'>" +
                         "<img class='inactive' src='" + ele.icon.inactive + "' style='' />" +
