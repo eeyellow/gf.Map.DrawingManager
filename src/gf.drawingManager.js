@@ -127,7 +127,7 @@ Version
             draggable: true
         },
         readonly: false,
-
+        mode: ["null", "marker", "polyline", "polygon", "rectangle", "delete"],
         onInitComplete: undefined,
         //onLocateClearComplete: undefined
     }
@@ -151,10 +151,12 @@ Version
                 .css(oCom.options.css);
             var html = "";
             oCom.options.btnArr.forEach(function(ele) {
-                html +=
-                "<span data-drawmode='" + ele.mode + "'>" +
-                    "<img class='inactive' src='" + ele.icon.inactive + "' style='' />" +
-                "</span>";
+                if(oCom.options.mode.indexOf(ele.mode) >= 0){
+                    html +=
+                    "<span data-drawmode='" + ele.mode + "'>" +
+                        "<img class='inactive' src='" + ele.icon.inactive + "' style='' />" +
+                    "</span>";
+                }
             });
             oCom.target
                 .append(html)
