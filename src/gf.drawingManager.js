@@ -114,7 +114,7 @@ Version
         colorButtons: {},
         drawingManager: null,
         drawingManagerContainer: null,
-        shapeTempArr: [],
+        shapePool: [],
         polygonOptions: {
             strokeWeight: 0,
             fillOpacity: 0.45,
@@ -224,7 +224,7 @@ Version
             google.maps.event.addListener(oCom.options.drawingManager, 'overlaycomplete', function(e) {
                 var newShape = e.overlay;
                 newShape.type = e.type;
-                newShape.id = oCom.options.shapeTempArr.length;
+                newShape.id = oCom.options.shapePool.length;
                 if (e.type !== google.maps.drawing.OverlayType.MARKER) {
                     // Switch back to non-drawing mode after drawing a shape.
                     //drawingManager._setDrawingMode(null);
@@ -259,10 +259,10 @@ Version
                     oCom._setSelection(newShape);
                 }
 
-                oCom.options.shapeTempArr.push({
+                oCom.options.shapePool.push({
                     shape: newShape,
                     type: e.type,
-                    id: oCom.options.shapeTempArr.length
+                    id: oCom.options.shapePool.length
                 });
             });
 
@@ -362,14 +362,14 @@ Version
         _clear: function(){
             var oCom = this;
 
-            oCom.options.shapeTempArr.forEach(function(ele){
+            oCom.options.shapePool.forEach(function(ele){
                 if(ele != undefined)
                 {
                     ele.shape.setMap(null);
                     ele = null;
                 }
             });
-            oCom.options.shapeTempArr = [];
+            oCom.options.shapePool = [];
 
             oCom.options.selectedShape = null;
 
@@ -381,7 +381,7 @@ Version
             oCom._clearSelection();
             if (shape.type == 'marker') {
                 shape.setIcon(oCom.options.markerIcon.active);
-            } else {
+            } else {                
                 shape.setEditable(true);
                 //_selectColor(shape.get('fillColor') || shape.get('strokeColor'));
                 shape.setOptions({
@@ -404,9 +404,9 @@ Version
                 oCom.options.selectedShape.setMap(null);
             }
 
-            for (var i = 0; i < oCom.options.shapeTempArr.length; i++) {
-                if (oCom.options.shapeTempArr[i] != undefined && oCom.options.shapeTempArr[i].id == oCom.options.selectedShape.id) {
-                    oCom.options.shapeTempArr[i] = null;
+            for (var i = 0; i < oCom.options.shapePool.length; i++) {
+                if (oCom.options.shapePool[i] != undefined && oCom.options.shapePool[i].id == oCom.options.selectedShape.id) {
+                    oCom.options.shapePool[i] = null;
                 }
             }
         },
@@ -443,7 +443,7 @@ Version
          */
         _getShapeArr: function() {
             var oCom = this;
-            return oCom.options.shapeTempArr;
+            return oCom.options.shapePool;
         },
         /**
          * 設定繪圖模式，參數可為"null", "marker", "polyline", "polygon", "circle", "rectangle"
@@ -587,11 +587,11 @@ Version
                             obj.setPosition(myLatLng);
                             obj.setIcon(oCom.options.markerIcon.default);
                             obj.type = "marker";
-                            obj.id = oCom.options.shapeTempArr.length;
+                            obj.id = oCom.options.shapePool.length;
                             featureCollectionArray.push({
                                 shape: obj,
                                 type: google.maps.drawing.OverlayType.MARKER,
-                                id: oCom.options.shapeTempArr.length
+                                id: oCom.options.shapePool.length
                             });
                         } else {
                             //圓
@@ -600,11 +600,11 @@ Version
                             obj.setRadius(feature.properties.radius);
                             obj.setOptions(oCom.options.polygonOptions);
                             obj.type = "circle";
-                            obj.id = oCom.options.shapeTempArr.length;
+                            obj.id = oCom.options.shapePool.length;
                             featureCollectionArray.push({
                                 shape: obj,
                                 type: google.maps.drawing.OverlayType.CIRCLE,
-                                id: oCom.options.shapeTempArr.length
+                                id: oCom.options.shapePool.length
                             });
                         }
 
@@ -628,11 +628,11 @@ Version
                         obj.setOptions(oCom.options.polygonOptions);
                         obj.setPaths(polygonArr);
                         obj.type = "polygon";
-                        obj.id = oCom.options.shapeTempArr.length;
+                        obj.id = oCom.options.shapePool.length;
                         featureCollectionArray.push({
                             shape: obj,
                             type: google.maps.drawing.OverlayType.POLYGON,
-                            id: oCom.options.shapeTempArr.length
+                            id: oCom.options.shapePool.length
                         });
 
                         break;
@@ -651,11 +651,11 @@ Version
                         obj.setOptions(oCom.options.polylineOptions);
                         obj.setPath(polylineArr);
                         obj.type = "linestring";
-                        obj.id = oCom.options.shapeTempArr.length;
+                        obj.id = oCom.options.shapePool.length;
                         featureCollectionArray.push({
                             shape: obj,
                             type: google.maps.drawing.OverlayType.POLYLINE,
-                            id: oCom.options.shapeTempArr.length
+                            id: oCom.options.shapePool.length
                         });
 
                         break;
@@ -669,7 +669,7 @@ Version
                         oCom._setSelection(ele.shape);
                     });
                 }
-                oCom.options.shapeTempArr.push(ele);
+                oCom.options.shapePool.push(ele);
             });
 
 
