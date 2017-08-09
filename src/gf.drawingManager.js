@@ -274,43 +274,49 @@ Version
                 oCom._clearSelection();
             });
 
-            google.maps.Map.prototype.getGeoJson = function(callback) {
+            google.maps.Map.prototype.getGeoJson = function(dataset, callback) {
                 var geo = {
-                        "type": "FeatureCollection",
-                        "features": []
-                    },
-                    fx = function(g, t) {
+                    "type": "FeatureCollection",
+                    "features": []
+                };
+                var fx = function(g, t) {
+                    var that = [],
+                        arr,
+                        f = {
+                            MultiLineString: 'LineString',
+                            LineString: 'Point',
+                            MultiPolygon: 'Polygon',
+                            Polygon: 'LinearRing',
+                            LinearRing: 'Point',
+                            MultiPoint: 'Point'
+                        };
 
-                        var that = [],
-                            arr,
-                            f = {
-                                MultiLineString: 'LineString',
-                                LineString: 'Point',
-                                MultiPolygon: 'Polygon',
-                                Polygon: 'LinearRing',
-                                LinearRing: 'Point',
-                                MultiPoint: 'Point'
-                            };
+                    switch (t) {
+                        case 'Point':
+                            g = (g.get) ? g.get() : g;
+                            return ([g.lng(), g.lat()]);
+                            break;
+                        default:
+                            arr = g.getArray();
+                            for (var i = 0; i < arr.length; ++i) {
+                                that.push(fx(arr[i], f[t]));
+                            }
+                            if (t == 'LinearRing' &&
+                                that[0] !== that[that.length - 1]) {
+                                that.push([that[0][0], that[0][1]]);
+                            }
+                            return that;
+                    }
+                };
 
-                        switch (t) {
-                            case 'Point':
-                                g = (g.get) ? g.get() : g;
-                                return ([g.lng(), g.lat()]);
-                                break;
-                            default:
-                                arr = g.getArray();
-                                for (var i = 0; i < arr.length; ++i) {
-                                    that.push(fx(arr[i], f[t]));
-                                }
-                                if (t == 'LinearRing' &&
-                                    that[0] !== that[that.length - 1]) {
-                                    that.push([that[0][0], that[0][1]]);
-                                }
-                                return that;
-                        }
-                    };
-
-                this.data.forEach(function(feature) {
+                var targetData;
+                if(dataset == undefined){
+                    targetData = this.data;
+                }
+                else{
+                    targetData = dataset;
+                }
+                targetData.forEach(function(feature) {
                     var _feature = {
                         type: 'Feature',
                         properties: {}
@@ -512,42 +518,46 @@ Version
          */
         _getGeoJsonData: function() {
             var oCom = this;
-            oCom.options.targetMap.data.setStyle({
+
+            var shadowDataLayer = new google.maps.Data();
+            shadowDataLayer.setStyle({
                 visible: false
             });
-            oCom.options.shapeTempArr.forEach(function(obj) {
+            shadowDataLayer.setMap(oCom.options.targetMap);
+
+            oCom.options.shapePool.forEach(function(obj) {
                 if (obj != undefined) {
                     switch (obj.type) {
                         case google.maps.drawing.OverlayType.MARKER:
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 geometry: new google.maps.Data.Point(obj.shape.getPosition())
                             }));
                             break;
                         case google.maps.drawing.OverlayType.RECTANGLE:
-                            var b = obj.shape.getBounds(),
-                                p = [b.getSouthWest(), {
+                            var b = obj.shape.getBounds();
+                            var p = [b.getSouthWest(), {
                                     lat: b.getSouthWest().lat(),
                                     lng: b.getNorthEast().lng()
                                 }, b.getNorthEast(), {
                                     lng: b.getSouthWest().lng(),
                                     lat: b.getNorthEast().lat()
-                                }]
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                                }];
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 geometry: new google.maps.Data.Polygon([p])
                             }));
                             break;
                         case google.maps.drawing.OverlayType.POLYGON:
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 geometry: new google.maps.Data.Polygon([obj.shape.getPath().getArray()])
                             }));
                             break;
                         case google.maps.drawing.OverlayType.POLYLINE:
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 geometry: new google.maps.Data.LineString(obj.shape.getPath().getArray())
                             }));
                             break;
                         case google.maps.drawing.OverlayType.CIRCLE:
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 properties: {
                                     radius: obj.shape.getRadius()
                                 },
@@ -558,12 +568,8 @@ Version
                 }
             });
 
-            var result = oCom.options.targetMap.getGeoJson();
-            oCom.options.targetMap.data.forEach(function(feature) {
-                oCom.options.targetMap.data.remove(feature);
-            });
+            var result = oCom.options.targetMap.getGeoJson(shadowDataLayer);
             return result;
-
         },
         /**
          * 將FeatureCollection新增到圖面上
