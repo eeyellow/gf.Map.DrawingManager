@@ -127,7 +127,7 @@ Version
             draggable: true
         },
         readonly: false,
-        mode: ["null", "marker", "polyline", "polygon", "rectangle", "delete"],
+        //mode: ["null", "marker", "polyline", "polygon", "rectangle", "delete"],
         onInitComplete: undefined,
         //onLocateClearComplete: undefined
     }
