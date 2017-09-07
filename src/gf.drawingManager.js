@@ -3,7 +3,7 @@
 Author: Ray
 Version
     1.0.0   2017-05-24
-
+    1.0.1   2017-08-10
 */
 //需要 jQuery
 ;(function($, window, document, undefined) {
@@ -38,23 +38,20 @@ Version
         },
         iconContainerCss: {
             "padding": "5px",
-            //"background-color": "#FFFFFF",
             "cursor": "pointer",
             "border-left": "1px solid rgb(221, 221, 221)",
             "width": "28px",
             "height": "28px",
             "text-align": "center",
-            "display": "inline-block",
-            //"border-radius": "3px 0px 0px 3px"
+            "display": "inline-block"
         },
         iconCss: {
             "width": "16px",
             "height": "16px",
-            "position": "relative",
-            //top: "2px"
+            "position": "relative"
         },
         selectedShape: null,
-        //colors: ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082'],
+
         btnArr: [
             {
                 mode: "null",
@@ -94,8 +91,8 @@ Version
             {
                 mode: "circle",
                 icon:  {
-                    inactive: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA4klEQVR42mNgQAVCQFwFxHVA7A7EVkBsD8QRQFwJxN5AzMKAAzADcR9UExsWeTaoXD82Q5iAuBiI5RgIAw0gXoBsiBDUZnkiNHMB8SQgNgXiCVBXM1RDnUYIgFzZC8SSUD5IjzGIUQ/E7EQYkA/Eikh8kJ44EMODgEZmqJ+Vscg1gQhLAgbkALEaDrkWEGFHwAABPHJgAyIZyAdgL1QRGYjoAKQnHsTwITIa0YElLBqZoclTjgTNssgJCWZICZGGyELVsmCL7wkEMpMlVA3eHGkExLFA3AiNphYoOxYqx4ysAQDDUhkZc8KcKwAAAABJRU5ErkJggg==',
-                    active: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABRUlEQVR42mNgoAU4b6Ag8NTDIveJl3UbCIPYIDGCGt+aq/A9dbMIf+RhFnnTwVjkopseNwiD2E+BYiA5kBqsmu+6GPM/d7deeF9BgQMmdltFhR2EYXyQHEgNSC2GASDT7yswcDxzMdJ8bCnDCTbA05wPhEFskBhIDqTmqadFOKqfHUB+toyEKXzgYmJ430GB44a1NS8Ig9ggMZhrHntZRt13MECECSiQQP6E8bcBFb5wMdaFeeGRm57ONiSvPAWHiVUu3IAnXlbtT42NuUCKXwNtfKWlxQNiP/c0tQdhEBskBpIDsV8AAxYUO2Qb8NTHmAvFAHCcO5sJ4/LCE1dTA+TYuO1pKIriBVID8Sl6ICJH40NHU21c0fgAGo3PvSzCsCakJ+5WiwglJJCad9gSEtgQYyVgarQIe4ojKYPkQGpol5nIAQADEsn+VAq8rAAAAABJRU5ErkJggg=='
+                    inactive: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ2ICg0NDQyMykgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+VW50aXRsZWQ8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsIiBzdHJva2U9IiMwMDAwMDAiIGN4PSI5IiBjeT0iOSIgcj0iOCI+PC9jaXJjbGU+CiAgICAgICAgPHBhdGggZD0iTTkuNSw5LjUgTDE0LjUsMy41IiBpZD0iTGluZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIj48L3BhdGg+CiAgICA8L2c+Cjwvc3ZnPg==',
+                    active: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ2ICg0NDQyMykgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+VW50aXRsZWQ8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsIiBzdHJva2U9IiNGRjAwMDAiIGN4PSI5IiBjeT0iOSIgcj0iOCI+PC9jaXJjbGU+CiAgICAgICAgPHBhdGggZD0iTTkuNSw5LjUgTDE0LjUsMy41IiBpZD0iTGluZSIgc3Ryb2tlPSIjRkYwMDAwIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIj48L3BhdGg+CiAgICA8L2c+Cjwvc3ZnPg=='
                 }
             },
             {
@@ -110,11 +107,12 @@ Version
             default: "data:image/png;base64,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",
             active: "data:image/png;base64,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"
         },
+        //colors: ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082'],
         //selectedColor: null,
         colorButtons: {},
         drawingManager: null,
         drawingManagerContainer: null,
-        shapeTempArr: [],
+        shapePool: [],
         polygonOptions: {
             strokeWeight: 0,
             fillOpacity: 0.45,
@@ -136,7 +134,6 @@ Version
         readonly: false,
         //mode: ["null", "marker", "polyline", "polygon", "rectangle", "delete"],
         onInitComplete: undefined,
-        //onLocateClearComplete: undefined
     }
 
     //私有方法
@@ -224,10 +221,9 @@ Version
             google.maps.event.addListener(oCom.options.drawingManager, 'overlaycomplete', function(e) {
                 var newShape = e.overlay;
                 newShape.type = e.type;
-                newShape.id = oCom.options.shapeTempArr.length;
+                newShape.id = oCom.options.shapePool.length;
                 if (e.type !== google.maps.drawing.OverlayType.MARKER) {
                     // Switch back to non-drawing mode after drawing a shape.
-                    //drawingManager._setDrawingMode(null);
                     oCom._setDrawingMode("null")
 
                     // Add an event listener that selects the newly-drawn shape when the user
@@ -259,10 +255,10 @@ Version
                     oCom._setSelection(newShape);
                 }
 
-                oCom.options.shapeTempArr.push({
+                oCom.options.shapePool.push({
                     shape: newShape,
                     type: e.type,
-                    id: oCom.options.shapeTempArr.length
+                    id: oCom.options.shapePool.length
                 });
             });
 
@@ -274,43 +270,49 @@ Version
                 oCom._clearSelection();
             });
 
-            google.maps.Map.prototype.getGeoJson = function(callback) {
+            google.maps.Map.prototype.getGeoJson = function(dataset, callback) {
                 var geo = {
-                        "type": "FeatureCollection",
-                        "features": []
-                    },
-                    fx = function(g, t) {
+                    "type": "FeatureCollection",
+                    "features": []
+                };
+                var fx = function(g, t) {
+                    var that = [],
+                        arr,
+                        f = {
+                            MultiLineString: 'LineString',
+                            LineString: 'Point',
+                            MultiPolygon: 'Polygon',
+                            Polygon: 'LinearRing',
+                            LinearRing: 'Point',
+                            MultiPoint: 'Point'
+                        };
 
-                        var that = [],
-                            arr,
-                            f = {
-                                MultiLineString: 'LineString',
-                                LineString: 'Point',
-                                MultiPolygon: 'Polygon',
-                                Polygon: 'LinearRing',
-                                LinearRing: 'Point',
-                                MultiPoint: 'Point'
-                            };
+                    switch (t) {
+                        case 'Point':
+                            g = (g.get) ? g.get() : g;
+                            return ([g.lng(), g.lat()]);
+                            break;
+                        default:
+                            arr = g.getArray();
+                            for (var i = 0; i < arr.length; ++i) {
+                                that.push(fx(arr[i], f[t]));
+                            }
+                            if (t == 'LinearRing' &&
+                                that[0] !== that[that.length - 1]) {
+                                that.push([that[0][0], that[0][1]]);
+                            }
+                            return that;
+                    }
+                };
 
-                        switch (t) {
-                            case 'Point':
-                                g = (g.get) ? g.get() : g;
-                                return ([g.lng(), g.lat()]);
-                                break;
-                            default:
-                                arr = g.getArray();
-                                for (var i = 0; i < arr.length; ++i) {
-                                    that.push(fx(arr[i], f[t]));
-                                }
-                                if (t == 'LinearRing' &&
-                                    that[0] !== that[that.length - 1]) {
-                                    that.push([that[0][0], that[0][1]]);
-                                }
-                                return that;
-                        }
-                    };
-
-                this.data.forEach(function(feature) {
+                var targetData;
+                if(dataset == undefined){
+                    targetData = this.data;
+                }
+                else{
+                    targetData = dataset;
+                }
+                targetData.forEach(function(feature) {
                     var _feature = {
                         type: 'Feature',
                         properties: {}
@@ -362,14 +364,14 @@ Version
         _clear: function(){
             var oCom = this;
 
-            oCom.options.shapeTempArr.forEach(function(ele){
+            oCom.options.shapePool.forEach(function(ele){
                 if(ele != undefined)
                 {
                     ele.shape.setMap(null);
                     ele = null;
                 }
             });
-            oCom.options.shapeTempArr = [];
+            oCom.options.shapePool = [];
 
             oCom.options.selectedShape = null;
 
@@ -404,9 +406,9 @@ Version
                 oCom.options.selectedShape.setMap(null);
             }
 
-            for (var i = 0; i < oCom.options.shapeTempArr.length; i++) {
-                if (oCom.options.shapeTempArr[i] != undefined && oCom.options.shapeTempArr[i].id == oCom.options.selectedShape.id) {
-                    oCom.options.shapeTempArr[i] = null;
+            for (var i = 0; i < oCom.options.shapePool.length; i++) {
+                if (oCom.options.shapePool[i] != undefined && oCom.options.shapePool[i].id == oCom.options.selectedShape.id) {
+                    oCom.options.shapePool[i] = null;
                 }
             }
         },
@@ -416,7 +418,7 @@ Version
             oCom.options.selectedColor = color;
             for (var i = 0; i < colors.length; ++i) {
                 var currColor = colors[i];
-                oCom.optionscolorButtons[currColor].style.border = currColor == color ? '2px solid #789' : '2px solid #fff';
+                oCom.options.colorButtons[currColor].style.border = currColor == color ? '2px solid #789' : '2px solid #fff';
             }
 
             // Retrieves the current options from the drawing manager and replaces the
@@ -443,7 +445,7 @@ Version
          */
         _getShapeArr: function() {
             var oCom = this;
-            return oCom.options.shapeTempArr;
+            return oCom.options.shapePool;
         },
         /**
          * 設定繪圖模式，參數可為"null", "marker", "polyline", "polygon", "circle", "rectangle"
@@ -455,12 +457,6 @@ Version
                 .find('span[data-drawmode=' + mode + ']')
                 .children('img')
                 .each(function(){
-                    /*
-                    var imgsrc = $(this).attr('src');
-                    if(!imgsrc.includes("_active")){
-                        $(this).attr('src', imgsrc.replace(".png", "_active.png"));
-                    }
-                    */
                     $(this).toggleClass('active inactive');
 
                     var targetMode = mode == undefined ? "null" : mode;
@@ -512,42 +508,46 @@ Version
          */
         _getGeoJsonData: function() {
             var oCom = this;
-            oCom.options.targetMap.data.setStyle({
+
+            var shadowDataLayer = new google.maps.Data();
+            shadowDataLayer.setStyle({
                 visible: false
             });
-            oCom.options.shapeTempArr.forEach(function(obj) {
+            shadowDataLayer.setMap(oCom.options.targetMap);
+
+            oCom.options.shapePool.forEach(function(obj) {
                 if (obj != undefined) {
                     switch (obj.type) {
                         case google.maps.drawing.OverlayType.MARKER:
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 geometry: new google.maps.Data.Point(obj.shape.getPosition())
                             }));
                             break;
                         case google.maps.drawing.OverlayType.RECTANGLE:
-                            var b = obj.shape.getBounds(),
-                                p = [b.getSouthWest(), {
+                            var b = obj.shape.getBounds();
+                            var p = [b.getSouthWest(), {
                                     lat: b.getSouthWest().lat(),
                                     lng: b.getNorthEast().lng()
                                 }, b.getNorthEast(), {
                                     lng: b.getSouthWest().lng(),
                                     lat: b.getNorthEast().lat()
-                                }]
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                                }];
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 geometry: new google.maps.Data.Polygon([p])
                             }));
                             break;
                         case google.maps.drawing.OverlayType.POLYGON:
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 geometry: new google.maps.Data.Polygon([obj.shape.getPath().getArray()])
                             }));
                             break;
                         case google.maps.drawing.OverlayType.POLYLINE:
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 geometry: new google.maps.Data.LineString(obj.shape.getPath().getArray())
                             }));
                             break;
                         case google.maps.drawing.OverlayType.CIRCLE:
-                            oCom.options.targetMap.data.add(new google.maps.Data.Feature({
+                            shadowDataLayer.add(new google.maps.Data.Feature({
                                 properties: {
                                     radius: obj.shape.getRadius()
                                 },
@@ -558,12 +558,8 @@ Version
                 }
             });
 
-            var result = oCom.options.targetMap.getGeoJson();
-            oCom.options.targetMap.data.forEach(function(feature) {
-                oCom.options.targetMap.data.remove(feature);
-            });
+            var result = oCom.options.targetMap.getGeoJson(shadowDataLayer);
             return result;
-
         },
         /**
          * 將FeatureCollection新增到圖面上
@@ -587,11 +583,11 @@ Version
                             obj.setPosition(myLatLng);
                             obj.setIcon(oCom.options.markerIcon.default);
                             obj.type = "marker";
-                            obj.id = oCom.options.shapeTempArr.length;
+                            obj.id = oCom.options.shapePool.length;
                             featureCollectionArray.push({
                                 shape: obj,
                                 type: google.maps.drawing.OverlayType.MARKER,
-                                id: oCom.options.shapeTempArr.length
+                                id: oCom.options.shapePool.length
                             });
                         } else {
                             //圓
@@ -600,11 +596,11 @@ Version
                             obj.setRadius(feature.properties.radius);
                             obj.setOptions(oCom.options.polygonOptions);
                             obj.type = "circle";
-                            obj.id = oCom.options.shapeTempArr.length;
+                            obj.id = oCom.options.shapePool.length;
                             featureCollectionArray.push({
                                 shape: obj,
                                 type: google.maps.drawing.OverlayType.CIRCLE,
-                                id: oCom.options.shapeTempArr.length
+                                id: oCom.options.shapePool.length
                             });
                         }
 
@@ -628,11 +624,11 @@ Version
                         obj.setOptions(oCom.options.polygonOptions);
                         obj.setPaths(polygonArr);
                         obj.type = "polygon";
-                        obj.id = oCom.options.shapeTempArr.length;
+                        obj.id = oCom.options.shapePool.length;
                         featureCollectionArray.push({
                             shape: obj,
                             type: google.maps.drawing.OverlayType.POLYGON,
-                            id: oCom.options.shapeTempArr.length
+                            id: oCom.options.shapePool.length
                         });
 
                         break;
@@ -651,11 +647,11 @@ Version
                         obj.setOptions(oCom.options.polylineOptions);
                         obj.setPath(polylineArr);
                         obj.type = "linestring";
-                        obj.id = oCom.options.shapeTempArr.length;
+                        obj.id = oCom.options.shapePool.length;
                         featureCollectionArray.push({
                             shape: obj,
                             type: google.maps.drawing.OverlayType.POLYLINE,
-                            id: oCom.options.shapeTempArr.length
+                            id: oCom.options.shapePool.length
                         });
 
                         break;
@@ -663,16 +659,14 @@ Version
             });
             featureCollectionArray.forEach(function(ele) {
                 ele.shape.setMap(oCom.options.targetMap);
-                if(!readonly)
+                if(!oCom.options.readonly)
                 {
                     google.maps.event.addListener(ele.shape, 'click', function(e) {
                         oCom._setSelection(ele.shape);
                     });
                 }
-                oCom.options.shapeTempArr.push(ele);
+                oCom.options.shapePool.push(ele);
             });
-
-
         },
         /**
          * 取得綁定的地圖物件
