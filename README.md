@@ -11,7 +11,7 @@ Dependencies
 How to Use
 --------
 
-1. 引用jQuery
+1. 引用jQuery
 2. 引用Google Map Javascript API with drawing library
 ```html
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=drawing"></script>
