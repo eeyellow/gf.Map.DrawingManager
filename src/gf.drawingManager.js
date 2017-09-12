@@ -28,18 +28,30 @@ Version
     //預設參數
     DrawingManager.options = {
         targetMap: null,
+        toolName: "DrawingManager",
+        toolSwitch: true,
         css: {
             "margin": "10px",
             "border-radius": "3px",
             "background-color": "#FFFFFF",
-            "display": "flex"
+            "display": "flex",
+            "box-shadow": "0px 2px 2px 0px rgba(200, 200, 200, 0.75)"
+        },
+        toolSwitchContainerCss: {
+            "display": "flex",
+            "align-items": "center",
+            "justify-content": "center",
+            "padding": "0 7px",
+            "height": "30px",
+            "cursor": "pointer",
+            "border-right": "1px solid rgb(221, 221, 221)",
         },
         iconContainerCss: {
-            "padding": "5px",
+            "padding": "0",
             "cursor": "pointer",
             "border-left": "1px solid rgb(221, 221, 221)",
-            "width": "28px",
-            "height": "28px",
+            "width": "30px",
+            "height": "30px",
             "text-align": "center",
             "display": "flex",
             "flex": "1",
@@ -59,49 +71,56 @@ Version
                 icon: {
                     inactive: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA3gAAAN4B3eqDagAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKHSURBVFiFxZc9aBRREMd/kxgIGM5CbBQEUYhEJYqYwo9YKAqCjYVaWkhip+BHIcEgiJ2INhERsZKksBAUFYugERELQYIYRIv4gegVQY1BOXUs3uz5cre7t2+zh394zLu5fTP/fbvzf7OoKlkHsBcYA74AL4ELwIKQGHUxA5KfBzRmvAOWNJUAsMtL+Aw4BFwFfpjvTrMJXLdEk0Cr5z/uEVuYh0AL2dBl9pqq/vb8V7z5moyxZiErgXazU75TVadirmkKgaahSAI9IlL6nwROA2UReSoiD0RkSETWNVo0r6Dkn4ES7j3YYL5eoF9E7gHjuPIdUSufKlJKbxHQYfMJXKkdibmux2wbcAIYAc4BL6gXrVFgcaIOAAIcA97bgj/AG2AmiUDKDbQbkUvAfYulwO00AkMxrP1xOLfiwQEvzrY6IRKRVUCf/XwM7AG2A6eAcpYXoQGGge8231z1egwHjN03oK2GfQdwFtiXdwcszk3LMRz5/CpYaXZUVSs+dVWdBk4WsAs/zVZ31NeBabO9ItIvIlJAwlqsNfuk6vG2Zz3uGUUvykOgay5bHvMYo0pYkVQFG/lX8wpUgEGgpQACOy1mObEMPUE5CLz1iNwl53nvxb1ssW6lEqgRkoseiUmgM2fyVpxcKzCQiYC3eD+uNBX4BHTnILDFu5FNQQQsQDfw0QK8BiSQwFESNCbTcayqz4EduDNhuc1DEB3LY1qjMZn7AVUdxzWn4HQ9BKvNPqr9I7QfiLR8t4hMBKxbZnZmrgQizAc6c66dhWY3pTdsJKKoliwOX3HfkuDa+diGNZRApfElVZSAM948fn1gPW8lvWNKG7+ApXUxc6jaIPAhMPkroC8u3l8Ok6p44G/jtQAAAABJRU5ErkJggg==',
                     active: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACFUlEQVR42uWXSyhEURjH75iUxUSSDWWlFGmSsiBRFiM7G6ZsLISyoDwWGmQzC5LXYibKavLKhrzKQsjGQjYisfBK2JDxmDDjf+qbOk1nrnvmPizc+nXm3vOd7/ufc+73nTuKInFFFKUurCh74Bmc4H4cpClWXAg0CiKxQMg12myzg9dwAQ/RtoIZ8EHPNswWMEsCLoGde97NrUaGaQIwwyMKMhgjLJ0TUGnmCpxSkA5BX1RA9b8X0A9S/1IAIwQOwA7wgSKrBNyDd0GdCLMURTsE3MAmEzQTODQIKKE2GfSABQQdQXssKFrbaLPUgtpAF7iJzgBcgLd4AlR8pZAQP9giX8zHmtogn6jccrTr2MZGzk+VyKAAfJPBPqhlhqAPM3kwQABbkSD5GRAZeGifXth+xvQ5gBfU66yoyyRgXiQgQAJWTKwniyRgUtTpp84n0CKVMtoFnFGMBlFnMXjlXpRdkG9gcAeXCbnxjEq5nGd8shcGJBkgwEVb/PibISsoTTC84grIpt7zHj6myN+q5rQBE9xqsI+RvARnb+dS2SM72E2pGa35zgQElHMTKUtkBk6IuKPtOJfNENh3xqsxMk4KuSxxSY4N0Lh1vW/yNM1kLsFvyl69AsZIQJDSVSsh2dNUVYAOLBewRFgvgP1/ZBWUQb8NETAsuQJeInrfpldAhY79/wI5Rpxq7HC6lQzOjuFmkb8fiqZrXVP60KMAAAAASUVORK5CYII='
-                }
+                },
+                title: "Pan"
             },
             {
                 mode: "marker",
                 icon:  {
                     inactive: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABCAAAAQgBaVp/QgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAIBSURBVFiFrZbPS1RRGIafM46hEihYoC5bCNIkLgJxWbswiAJxYYHbFrboXxDBRS21XKSuwlUggls3bjJowKBQRAgLFKNAaIJx9GsxZ2AY7/3Oj3sPfJv73fd9n3NmzrnHiAi+wxjTDUwBw0AJuA3UgO/AAbAGbIjIhbepiDgLaAdmgFNAHPUDeAkYL2+P8BFg3yO4tT4A1zMBAP3AUUR4o3aB3igAoBPYyRDeqJVYgHc5hDfqXhCAnX3Fw/gzsAmcON7bA4ohAA8dhnPArZZdMuvQPA4BWFKMlpSfbVnRvQ8B+KkY3VcABhXdLxLOhiSTDsdSDigABviraDtaNQWujvOEZ83jmtLrBrpSetUk7ysAUj/HD5WQSaX3SOl9kaRvRMpSviF9GWsk/A+AIeC3onub5zb8AyzaGY8D88A/h+ZBCEAB+OowDKlyzFH8LEeAiRiANqCcQ/g2yt0gFcBCjAGXGcLPgTtqhtb0OF5d9crp7wFwE317pdURWW9ETRDPIwCeeHl7AhSATwHh6z6+3gAW4i5w4RF+DNzIHcBCLHgATAd5BgL02BmmhX/U9nxmAAvxNCX8EhgN9gsVWIitBIDVKK9IgCHqF4xG+BnQF+OVdCNyDhH5BrxuejQrIscxXsbOKFxoTBf1T3YVKIlINcanGJUOiEjFGPMCqMWGA/wHnXeFoNo3dbUAAAAASUVORK5CYII=',
                     active: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABvklEQVR42sWXzStEURjG3zFoSFEorGShLJSFkiU7H/kqO2JL2Sj5AyQWtphZGFayUja2NrPBZMpCUUoNNSJTCvma8VxddZtm3vM511u/Tk3nOc9zztxz7rlECpUlqgazIAxiIJ0hekAbB3tgBATJdmHQMjDnmmUF3IJ5ELBl3gGuJIxz2QdVpuaNmHVSw/wXaM/R1uqaV4ATXXMP27oBtiyY/9GjM/tXiSU+Q3sI7gX9LtGWqgQYFJgvg5acXbIk0IyqBIgwA0UYXZTR7aoEuGMG6mV0rczf8Ch1NqBTSLCUTYw2AF4YbUgmQFAQoJnR1jC6d+ljGh2vmYEWGd0Uo4urPAObzEBf+Z4D/NYGnhhd2OY2TIMNMAwGwCp4E2j6VAKUgAuLJ2FC5yietBhgXCeAsxsSFsxj2ncDCLtBxsD8E7Sb3gmiBgHWbNyI6gXbq9DRmzS+EXlCzGjMfszmpdTZlqcKsz8oxs24E3xLBEiBOipGYeB1iQDTVKxy33YpZumPrX0PMCEmCgRwzosu8qMw06M8AXbIr3JfvR+epX9G20B+FgxXPLNfIL8LppXgxv1uLKf/KBgPgX6TMX4ArstZcDqK0HYAAAAASUVORK5CYII='
-                }
+                },
+                title: "Drawing: Marker"
             },
             {
                 mode: "polyline",
                 icon:  {
                     inactive: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAACPVBMVEUDAAAEAAD///8AAAAEAAAAAAAAAAAAAAADAAAAAAADAAAEAAAAAAADAAAAAAADAAAEAAAAAAAEAAADAAAEAAAAAAADAAAAAAADAAAEAAAAAAADAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAADAAAEAAADAAAEAAADAAAEAAAAAAAEAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAEAAADAAAAAAADAAADAAAAAAAAAAAAAAAAAAADAAAEAAAEAAAAAAAEAAADAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAADAAAAAAAEAAADAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAADAAAAAAADAAAEAAAEAAADAAAEAAAAAAAAAAAAAAADAAADAAAEAAADAAAEAAADAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAACAAADAAAEAAAAAAAAAAAEAAAEAAADAAAAAAAEAAAAAAAAAAAAAAAAAAADAAAEAAADAAAEAAAAAAAAAAAAAAAEAAADAAAEAAAAAAADAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAEAAADAAAAAAADAAAEAAAEAAAAAAAAAAADAAAAAAAAAAABAAADAAAEAACZlDwkAAAAu3RSTlMAAAABAQIDBAQFBQUGBgcHBwgICQkKCgsMDA0NDQ4QEhUWFxkbHB8gISIjIyQkJSUmJigoKSoqKywvNTc5OTo7Oz1AQEVHSlBVVlZXWVlaYGFkZmhpa29vcHJzdXV4eXx9gIGEh4uOj5CQkJGSkpSVlpqbm5ycnZ2fpKWnqqyur7CytLi5vcDBw8TFxcXGx8fJysvLzdDS09PT1NTV19nb3OPl5ebp6eru7/Hy8/T19/f3+fr6+vv8/f3+ZYoTbAAAAdhJREFUeAF9z4dzTFEUBvBzb0SJVSQ6y0YUgogSvZdN9F4kohcJIcgqokQvUUTvZa0i0QvLdb6/zTH73jP7iu/O3Dln7m/unENaokiOIqLWG88OJymVdpIG2lUw7g0JBlnbwMDdwkBQARbAD0YHgB1gXFrwjHF/lC+oYnD9MJr6XP4Y6QUtqwBcK5Rqxjfgqge0r2RGg7yTWgnGTjfIqmRwQwEJKAXz3hwXaCb78Y3BJGANA7HO5AKyH+qH/t207Ccj1pPc4Cv4fIESUCYDHuimPOAz8yIiUqXfGTXZygs+gp9MkvkY2NdG+YBPYDydtgpALJt8AQN4KdeejioAMBjg/V2VLyhJvaOmB/mC6W9/X5w/e87cmTnkD2YZU9tJ2+ngVA7IO2SWOn1utMQDdNTMs9vM8kTTii4RF+hrtqaajAHFCZN89WLL7qIpurccC7R9V9dCS0LjqhONR+tOHPkS/3DmyupNF8ZaQD+81UvuPkse/To5MXeMzh+0bu3j28aYwzY4/qafbjX5srm+PKytRMaXv35/zAIZm5P5A2vj8V0juut/CUU3FFlAL/xx8HTjueL+Oi0hZ4vMU8bcXD9Be2KD8B3TtEzrYNB8cfX28H+AJC+ig/IHp5CnL3qRwHQAAAAASUVORK5CYII=',
                     active: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACh0lEQVR42r2XTUhVQRTHJ6uXfUkEGlJQaUZl0CqkInATgas2FbZSiChaGImgUJAQtAjKolr0QZsiiMiIFrUIijLJCKIPImoXL7BFYR9I6vP2O3iEYZjnvXrnvgs/7rx5583/P/ecmTfXmBlckTFzR43pHjPmCe21ppQXgvMQ70E8Ut7Rt6ZU4jLzs5a4bSL7J+HM3OU9JjZkKX7OEeyDffR/dUysz0L8vCuOUJ2mZRuf846JdaFyPscj/tLNN58b6R+xYvqzqHZhwFdsBWPa7DgxHaLafeJ1biz97U7cFeLmpxGf5Vlqr+iv9Yh3ODO/StyC0Eutz7fRqHjBEV+cOvdOMT0r8tg77DjErxG3KEjlM+A/y0BrkZyPOjMvD7bmGXTYGvwzg2+JKbhc0E3HNqAmviCynfYRT8GVB9/1XAPKoCN+OdVSm4GBKJOC8+wBu2PEwyy1IuKN48b85h5FE/90zbBH2UvfjsweuxrYqeIRRm4l3dGCFSIDVcMNNXEw4W+qoElSF8pEkxpoThBbBp08rW/wi3YbLITKNAaWq4EzU/1ZwSrYJeIaX6D9nfsgnIaLcjyTw4r+Zql9n/IMwEB/4J4cRjzf52ATXNKZD9G+I/Fwn/ZtGIE8DMNj6IejcBKew8Y4Ex8Y7A33JU7/MjjAdx+5j8MD2aa1Duo1phZq4Bh0EfsJ3k4Wt3IzzkAv/IQVk4cT2MpAL3QAORschooEKa2EzVIr8AP+wl0Tk99TklOdzWpdknnlghw4p7sZaeqkwE/EHt0JaIExuI74I83zUyk6WJmiwHNJgsoQfGjl6zUch4ZSvXpVRBOvWZGu7UOlfvGcDftlmUFPkkLLykh1qh1tGtd/lYIlMM+FrhMAAAAASUVORK5CYII='
-                }
+                },
+                title: "Drawing: Polyline"
             },
             {
                 mode: "polygon",
                 icon:  {
                     inactive: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAACDVBMVEUDAAAEAAD///8EAAADAAAEAAADAAADAAAEAAADAAADAAAEAAADAAAEAAADAAADAAAEAAADAAAEAAAEAAADAAAEAAADAAADAAAEAAADAAADAAADAAADAAAEAAAEAAAEAAAEAAADAAAEAAADAAAEAAAEAAADAAAEAAAEAAAEAAADAAADAAAEAAAEAAAEAAAEAAADAAAEAAADAAAEAAADAAADAAAEAAADAAADAAADAAAEAAAEAAADAAAEAAAEAAADAAAEAAADAAADAAAEAAADAAADAAADAAAEAAAEAAAEAAAEAAAEAAADAAAEAAADAAADAAAEAAAEAAADAAAEAAADAAAEAAADAAAEAAADAAADAAAEAAADAAAEAAADAAADAAAEAAAEAAADAAADAAADAAAEAAAEAAAEAAAEAAADAAAEAAADAAAEAAADAAADAAAEAAAEAAAEAAADAAAEAAAEAAADAAAEAAAEAAAEAAAEAAADAAAEAAAEAAADAAAEAAAEAAAEAAAEAAAEAAADAAAEAAAEAAADAAAEAAADAAADAAAEAAAEAAAEAAAEAAADAAAEAAADAAAEAAADAAAEAAAEAAADAAAEAAAEAAAEAAAEAAADAAAEAAAEAAADAAAEAAAEAAAEAAADAAAEAAADAAADAAAEAAADAAAEAAADAAAEAAADAAAEAAADAAAEAAADAAAEAACOnWCEAAAArXRSTlMAAAABAgIDBAQFBgYHCQoLCwwMDxAREhMTFhcYGxscHSEjIyQnKisrLTIzNjY3ODk+P0FBRUhISUtMTE5QUlRVV1pbW1xdYGJjZmhpa2xucHBydXd4eHl6fH1+gISGh4uOkJGTk5eYmZyeoaSlp6ipra6vsLGytLi5urq8vb7AwcbJy8zS09PW19jb3N3e3t/f4ODh4+fo6uvt7e7w8PHy8/X29/f4+fr7/Pz9/h9MGKMAAAHSSURBVHgBhdP3UxNRFMXxczZYjCKIMVjEXrBgx94LFgV7L4q9KPYiAvZCiR2L2BWRyL1/o5N1r7svMwzfyWTmZT5zsj/sg9dFPiBB+l8oqV3x74RM/wEYfOa+VdlEmHFAprW/RFQOEPB/YQh8wj0iZxd8VT2dH4wY8DVzj4tWel7xU5Hqge4CSLLwssiWzClZp3p/JAkiXCBG3dP2Ms8vflIkNcn5C6DkmXyf7VnlaWmZ74CFH/T9ZC+s9JO0lkXAuh/6aowXbXSDyjYDPKT6oAieU7JG9bCBqt8PkzRgda/SzwaWN53pFgKrWs4HIDZFa/OQDYamdZUtjE/rcDILbJd3gwyMa2pZzOyFejnFAGBETUdFNpiqugi2EL8hO3rQBSe0OWEAuChH+7kg96McAw3kVGpdPhywVDtKaYA9y/U53YWb+iIvXMAybRjigKJ2OULCFrCkrXmWAyr0z0wiBHPeyMrgxSdjiekHt95ujEdB8RNdHSMIFM7YeeHxF9E7uwCGz5BI6ZocDp6391L9T02/vr572gBEbhZZ8Ej277uWatX0yyubJ/YiQEYB+l/9JtLWeG7DhD52DaMAKNh499b6sb0JBoFwFth3GNnZ7e6iv9wHd4PIjOXmAAAAAElFTkSuQmCC',
                     active: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAClElEQVR42t2XTUhVURDHj2ZGJfTyQQnZIgyCwk1CH5vCRWAkEVIEWRAFURQigmSR0iJqEUThwoIIgsJapBUtSkpsE0StCirQ1GhhJIoZ+a2v34m5MAt79+u8JC/8ufeeN//5z5kzc859xvzPV8qYzVPGtIPKuRDfNWnMd8RTgup/Jo7YMTCuxP+AgC5lXHzamAYlehfR3eCnGrtNdpZmIuWLEbquZntV/VbMWLcKoo2xpEvxJIIPlUDtLDb5jHcom7eMFbkQL8LZG3E6BQ6nsc0l0JsqiG7GNsVqMxz2iLMRnssCFukpCdbyBuGVRxHfA3FA1nsg7EywL4M7JEGMpcvcbDM4DkZF/AvO1kXM4Fr4nd6S0EF1viQIV9QavsPJqpg1ZIvzheqea36zvwcmwXtLdtRFC8SvDeCHXwCVGH3mfgditsPds02ycD9dpFlgixi2u9rR7DKqrjjkZ7zBM+Z5taPtu07S34/PFb4ByBIMgr0uAsDfJ5n9rSDpWiNVOwOqHKR/q+qqiiCEXAyfSd+e4T0n5uxvSPr78JUIWrEtQmqElBfnBPV2Q3w1BSVl26NWUtYRpxPg7xc/M6mA54gNIEcOExt1j4vex09vqIlAOiDETogFcXvfLmVY8j6IE1I4OyLOvkrSP42f0rAB7IT0TRwcDMixu2gCbId7mQ46Dfclz122s8IGUAzxowRwxDr/26caKEXsLHYP4HwAw6rvX/HbuSjrl1AfmUe9Q4n7SlCOyHnGW2WHG/U+13j/yv0povXYbQPLo/Zvnj2OpYAuggs8P5GgxpRgL/dHoAZOCVjo6it4GU4fI/BLpdMWZRdoZoYnsdkIFmXqb5fNQDV4DZ6DE4ytD11MMYNYAgrNfL9+A8BUt252yyGMAAAAAElFTkSuQmCC'
-                }
+                },
+                title: "Drawing: Polygon"
             },
             {
                 mode: "rectangle",
                 icon:  {
                     inactive: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAn1BMVEUDAAAEAAD///8EAAADAAADAAAEAAAEAAADAAAEAAAEAAADAAAEAAAEAAAEAAAEAAAEAAADAAAEAAADAAADAAAEAAAEAAAEAAADAAAEAAAEAAADAAAEAAADAAADAAAEAAADAAAEAAADAAAEAAAEAAAEAAADAAAEAAADAAAEAAAEAAADAAADAAAEAAAEAAADAAAEAAAEAAAEAAADAAAEAADGEKmeAAAANXRSTlMAAABGR1FXWFlZYmRkZaCio6Skpaqqtbm9vcDCy9DW1tfX3d3f4OHh4uLl5+jo7e/v8vX39xszZnMAAADeSURBVDjL1ZO7TgNBDEXPGVkBiSIdz///rhQUdEgIiQhC9lLMKg/tLumQmOZq7GuPfe2x8fu55P8LQt1XkxiBIDEgBCD7l7rdbU072IVgTIuwWr3Wdv9cwUjGTAEkMuRubfm++14gwMfasrlUX1AaITjvR1LIQore15IO6VG6ROj+JO3MMOVZJDOUHLDlxBYDeEI1dbxn5oVYR1GmNRI56OhEpQ6VZLkJTPXJLEhNaGdFT7SSNuzn4wH9GlrdXH82+x4YM46or+DweDX49MC4J0Ls/Y4Y3zb+h591kfADcitjfgs22T8AAAAASUVORK5CYII=',
                     active: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAArklEQVR42u2WuwrCQBBF79fF2kptRf9LjDb2FhaC2NpYxUpiBImNCIJYGIhnxco+s4Jz4WQ228xhH7CSxxM7lbR6ShnsDMnou6EmQeDKoIS9IcfQF/rip4C8ltpM9BqmCx3Y0vNMHehjszDe9um3wNJSgNWeRRWoXCC2QO0Cfy/gh9AFfk6gYDA3vgWj8AiiDoPADS4wZmJiQAon+t3fK8BnDQ9rEDiwFS1/lXs8L4Qum0VYDTMSAAAAAElFTkSuQmCC'
-                }
+                },
+                title: "Drawing: Rectangle"
             },
             {
                 mode: "circle",
                 icon:  {
                     inactive: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ2ICg0NDQyMykgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+VW50aXRsZWQ8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsIiBzdHJva2U9IiMwMDAwMDAiIGN4PSI5IiBjeT0iOSIgcj0iOCI+PC9jaXJjbGU+CiAgICAgICAgPHBhdGggZD0iTTkuNSw5LjUgTDE0LjUsMy41IiBpZD0iTGluZSIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIj48L3BhdGg+CiAgICA8L2c+Cjwvc3ZnPg==',
                     active: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ2ICg0NDQyMykgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+VW50aXRsZWQ8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsIiBzdHJva2U9IiNGRjAwMDAiIGN4PSI5IiBjeT0iOSIgcj0iOCI+PC9jaXJjbGU+CiAgICAgICAgPHBhdGggZD0iTTkuNSw5LjUgTDE0LjUsMy41IiBpZD0iTGluZSIgc3Ryb2tlPSIjRkYwMDAwIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIj48L3BhdGg+CiAgICA8L2c+Cjwvc3ZnPg=='
-                }
+                },
+                title: "Drawing: Circle"
             },
             {
                 mode: "delete",
                 icon:  {
                     inactive: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABAAAAAQABTdB3JwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJASURBVFiF7Za/a1RBEMc/c54arURtIqeCRAV/IScWIvgD/wGxERTEQq3EysLCIqWKWKSwMSA2NlqJIKRRNAZJDHediIc2CgpGAxo4iPq1ePu8zbp3L9575poMDLvzfTO73/fe7OyYJLLEzJrA8g4u+yS9yFwoIqVugoqUsm+Y2QHipFLsGvDOw28AK4CqmfVF4uqSpjsykPRHgSagAvWQv35Me/4LFgmUA3sjYAWu/yXLweZTB/6nhF8AMzsHnPCghqQzZrYMGAncL0sabRfTFQFgE3DQs1e5sRTgAGszYjKl50m4SKDnBGJJmEcmgFfA+EITeAAMS2r8a2AhBCSNpXMzqwBVkipYkzSTFRxeyVeYe6XWHd4X4FNAv3u2BLgEfAp8fpL8jr3truM8BI47fAPwnM59wSwwWCSBuw4rAWPBG4eb+9jpoggMOOyihz0DtgNvPewmcASYcfY0UMlL4LPn+9FhP4DNDlsPNNzm6W171VtvMC+BR86uBH6vgXXu2Rpv85OOYOr3MG9POOHGaoBvAZ6Y2WpJU5JkZseAOySnhFhcNwRWujHW7YwAXz17nLlt/F9x3RDY5sY68MvDhySdT9/czCqS3gOHSXIilcm8BHaamUn67khActTuA5jZKeAe8NhVxQ/AqBfvz7s+hkcdtp/WOf9Gku3+uX8D3PbsSaBcRB2o0cry64F/O20CO+ZTiPqB3Z5udbgF+FIPv0Cr2MS0BuyKleLC2nIzGwDOAnto3YYvgafALUmzsbjfaRxIOyOSapMAAAAASUVORK5CYII=',
                     active: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABw0lEQVR42mNgIAL8Z2D4AcT/8WALBloCujkAaJAdEDtgwb+gFnUCcQYS/gYVz8KhT4DaPiUVO4w6YMg5QByIJaiI2RiGHAC6Og2IDyDhOVBxNjRxELbBp4dcB3Qgx+M/BoYLUHEOLHEcgE/PqANGHTAQDjgFxAuBOJveDrACYhVqlQMkOwBNvwwQ+4HKCCDmpqUD3gKxJFSOGYgrgPglmpq/0GgxpYUDwqHickB8lECl9BuIG6jpgGVQMSag/DE0H//HEgowdgK1HKACFStBUncYSGsD8T0kddOA2BmIv0L5H0BphCIHAPlvkNS+gKr7A8SqUDFZoJo7UMsZoWKdSGY2UOqA7UipHVndTSAtBZUTRrI8GupAmNotlEZBE5TvhyW+bwGxEJJZQWiWg8x7RqkDeqB8GywOmALzOVIo3UYz7wqlDtgG5fOgpfCJaD6XweGIhZSmgcdI8XsWKRHaQsXioA67DbWcEYjnI5mZSo1sCKsDrGGhAFT3GZrakUPlNprlIAezUMMB55FCoYfIJjqoya9DTEEkCcQGSFgdKs6IJs6KJJ6HVNhgwyAH69G6Na0CjYI9QPwOWhitgHZcWXHpAwCI8NfGybKEYQAAAABJRU5ErkJggg=='
-                }
+                },
+                title: "Delete Selected Item"
             },
         ],
         markerIcon: {
@@ -162,7 +181,7 @@ Version
                 if(oCom.options.mode == undefined || oCom.options.mode.indexOf(ele.mode) >= 0){
                     html +=
                     "<span data-drawmode='" + ele.mode + "'>" +
-                        "<img class='inactive' src='" + ele.icon.inactive + "' style='' />" +
+                        "<img class='inactive' src='" + ele.icon.inactive + "' style='' title='" + ele.title + "' />" +
                     "</span>";
                 }
             });
@@ -177,6 +196,25 @@ Version
                 .find('img')
                     .css(oCom.options.iconCss)
                     .end()
+
+            if(oCom.options.toolSwitch){
+                var toolSwitchContainer = $('<div/>', { class: "inactive toolSwitch" ,text: oCom.options.toolName, title: "Toggle the drawing tool" });
+                toolSwitchContainer.css(oCom.options.toolSwitchContainerCss);
+                oCom.target.prepend(toolSwitchContainer);
+
+                toolSwitchContainer.hover(function(){
+                    $(this).css('background', '#EEEEEE');
+                }, function(){
+                    $(this).css('background', '#FFFFFF');
+                });
+                toolSwitchContainer.click(function(){
+                    oCom._switch();
+                });
+
+                oCom.target
+                    .find('span')
+                    .hide();
+            }
         },
         //綁定事件
         _event: function() {
@@ -380,6 +418,27 @@ Version
             oCom.options.selectedShape = null;
 
             oCom._setDrawingMode("null");
+        },
+        //開啟或關閉功能
+        _switch: function(){
+            var oCom = this;
+            if(oCom.options.toolSwitch){
+                var toolSwitch = oCom.target.find('.toolSwitch');
+                toolSwitch.toggleClass('active inactive');
+
+                if(toolSwitch.hasClass('active')){
+                    toolSwitch.css('color', '#FF0000');
+                }
+                else{
+                    toolSwitch.css('color', '#000000');
+                }
+
+                oCom.target
+                    .find('span')
+                    .toggle()
+
+                oCom._setDrawingMode("null");
+            }
         },
         //設定目前所選物件的樣式
         _setSelection: function(shape) {
@@ -733,6 +792,9 @@ Version
         }
         this.clear = function(){
             drawingManager._clear();
+        }
+        this.switch = function(){
+            drawingManager._switch();
         }
         return this;
     }

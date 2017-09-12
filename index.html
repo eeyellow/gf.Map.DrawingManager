@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./node_modules/admin-lte/bootstrap/css/bootstrap.min.css">
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./node_modules/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzV-NzIbe9Lkk7GOKZ50WG7vhxR7qVt0&libraries=drawing"></script>
     <style>
         /* Always set the map height explicitly to define the size of the div
@@ -57,10 +57,11 @@
                 zoom: 7
             });
 
-            $.cachedScript("./src/gf.drawingManager.js").done(function () {                
+            $.cachedScript("./src/gf.drawingManager.js").done(function () {
                 myDrawingManager = $('#container_drawingmanager').gfMapDrawingManager({
-                    targetMap: map
-                });                
+                    targetMap: map,
+                    toolName: '數化工具'
+                });
             });
         });
 
