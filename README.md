@@ -17,7 +17,7 @@ How to Use
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=drawing"></script>
 ```
 3. 引用gf.Map.DrawingManager.js
-4. 初始化map
+4. 初始化map
 ```js
 map = new google.maps.Map(document.getElementById('map'), {
     center: {
@@ -27,13 +27,13 @@ map = new google.maps.Map(document.getElementById('map'), {
     zoom: 7
 });
 ```
-5. 增加一個div
+5. 增加一個div
 ```html
-<div id='divForDrawingManager'></div>
+<div id='divForDrawingManager'></div>
 ```
-6. 初始化繪圖管理員
+6. 初始化繪圖管理員
 ```js
-$('#divForDrawingManager').gfMapDrawingManager({
+$('#divForDrawingManager').gfMapDrawingManager({
     targetMap: map    
 });
 ```
@@ -54,7 +54,7 @@ Documentation
 ### 方法說明
 | 方法名稱     | 說明                        | 參數              | 回傳  |  預設值|
 |-------------|----------------------------|------------------|--------|-------|
-| getInstance   | 取得Google Map Drawing Manager實例     |   |  google.maps.drawing.DrawingManager  |       |
+| getInstance   | 取得Google Map Drawing Manager實例     |   |  google.maps.drawing.DrawingManager  |       |
 | getTargetMap   | 取得繪圖管理員綁定的Google Map實例     |   |  google.maps.Map  |       |
 | getGeoJsonData   | 取得目前所匯圖形的GeoJson Collection     |   |  FeatureCollection  |       |
 | addGeoJsonData   | 輸入GeoJson Collection，繪製於圖面上     | FeatureCollection  |   |       |
