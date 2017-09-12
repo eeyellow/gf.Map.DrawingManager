@@ -29,12 +29,10 @@ Version
     DrawingManager.options = {
         targetMap: null,
         css: {
-            "position": "absolute",
-            "top": "0",
-            "right": "0",
             "margin": "10px",
             "border-radius": "3px",
             "background-color": "#FFFFFF",
+            "display": "flex"
         },
         iconContainerCss: {
             "padding": "5px",
@@ -43,7 +41,10 @@ Version
             "width": "28px",
             "height": "28px",
             "text-align": "center",
-            "display": "inline-block"
+            "display": "flex",
+            "flex": "1",
+            "align-items": "center",
+            "justify-content": "center"
         },
         iconCss: {
             "width": "16px",
@@ -153,6 +154,9 @@ Version
             var oCom = this;
             oCom.target
                 .css(oCom.options.css);
+
+            oCom.options.targetMap.controls[google.maps.ControlPosition.TOP_LEFT].push(oCom.target[0]);
+
             var html = "";
             oCom.options.btnArr.forEach(function(ele) {
                 if(oCom.options.mode == undefined || oCom.options.mode.indexOf(ele.mode) >= 0){
