@@ -154,6 +154,10 @@ Version
         readonly: false,
         //mode: ["null", "marker", "polyline", "polygon", "rectangle", "delete"],
         onInitComplete: undefined,
+        onAddMarker: undefined,
+        onSwitch: undefined,
+        onOpen: undefined,
+        onClose: undefined
     }
 
     //私有方法
@@ -209,6 +213,12 @@ Version
                 });
                 toolSwitchContainer.click(function(){
                     oCom._switch();
+                    if(oCom.target.find('.toolSwitch').hasClass('active')){
+                        oCom.target.trigger('onOpen');
+                    }
+                    else{
+                        oCom.target.trigger('onClose');
+                    }
                 });
 
                 oCom.target
@@ -302,6 +312,10 @@ Version
                     type: e.type,
                     id: oCom.options.shapePool.length
                 });
+            });
+
+            google.maps.event.addListener(oCom.options.drawingManager, 'markercomplete', function(e) {
+                oCom.target.trigger('onAddMarker', e);
             });
 
             google.maps.event.addListener(oCom.options.drawingManager, 'drawingmode_changed', function(){
@@ -749,10 +763,29 @@ Version
         },
 
         /**
+         * 取得容器
+         * @returns {Object} jquery html object
+         */
+        _getContainer: function(){
+            var o = this;
+            return o.target;
+        },
+
+        _setEvent: function(evtName, evtCallback){
+            var oCom = this;
+            oCom.options[evtName] = evtCallback;
+            oCom._subscribeEvents();
+        },
+
+        /**
          * 取消事件註冊
          */
         _unsubscribeEvents: function () {
             this.target.off('onInitComplete');
+            this.target.off('onAddMarker');
+            this.target.off('onSwitch');
+            this.target.off('onOpen');
+            this.target.off('onClose');
         },
         /**
          * 綁定事件註冊
@@ -765,37 +798,70 @@ Version
             if (typeof (this.options.onInitComplete) === 'function') {
                 this.target.on('onInitComplete', this.options.onInitComplete);
             }
+
+            //綁定加入Feature事件接口
+            if (typeof (this.options.onAddMarker) === 'function') {
+                this.target.on('onAddMarker', this.options.onAddMarker);
+            }
+
+            //綁定工具開關事件接口
+            if (typeof (this.options.onSwitch) === 'function') {
+                this.target.on('onSwitch', this.options.onSwitch);
+            }
+
+            //綁定工具開啟事件接口
+            if (typeof (this.options.onOpen) === 'function') {
+                this.target.on('onOpen', this.options.onOpen);
+            }
+
+            //綁定工具關閉事件接口
+            if (typeof (this.options.onClose) === 'function') {
+                this.target.on('onClose', this.options.onClose);
+            }
         }
     }
 
     //公開方法
     $.fn[pluginName] = function(options, args) {
-        var drawingManager;
+        var gfObject;
         this.each(function() {
-            drawingManager = new DrawingManager($(this), options);
+            gfObject = new DrawingManager($(this), options);
         });
 
         this.getInstance = function(){
-            return drawingManager._getInstance();
+            return gfObject._getInstance();
         }
         this.getTargetMap = function(){
-            return drawingManager._getTargetMap();
+            return gfObject._getTargetMap();
+        }
+        this.getContainer = function(){
+            return gfObject._getContainer();
         }
         this.getGeoJsonData = function(){
-            return drawingManager._getGeoJsonData();
+            return gfObject._getGeoJsonData();
         }
         this.addGeoJsonData = function(featureCollection){
-            return drawingManager._addGeoJsonData(featureCollection);
+            return gfObject._addGeoJsonData(featureCollection);
         }
         this.setDrawingMode = function(mode){
-            drawingManager._setDrawingMode(mode);
+            gfObject._setDrawingMode(mode);
+        }
+        this.deleteSelectedShape = function(){
+            gfObject._deleteSelectedShape();
+        }
+        this.setEvent = function(evtName, evtCallback){
+            gfObject._setEvent(evtName, evtCallback);
         }
         this.clear = function(){
-            drawingManager._clear();
+            gfObject._clear();
         }
         this.switch = function(){
-            drawingManager._switch();
+            gfObject._switch();
         }
+        this.setSelection = function(shape){
+            gfObject._setSelection(shape);
+        }
+
         return this;
     }
 
