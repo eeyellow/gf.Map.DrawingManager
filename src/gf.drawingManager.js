@@ -154,6 +154,7 @@ Version
         readonly: false,
         //mode: ["null", "marker", "polyline", "polygon", "rectangle", "delete"],
         onInitComplete: undefined,
+        onAddOverlay: undefined,
         onAddMarker: undefined,
         onSwitch: undefined,
         onOpen: undefined,
@@ -312,6 +313,8 @@ Version
                     type: e.type,
                     id: oCom.options.shapePool.length
                 });
+
+                oCom.target.trigger('onAddOverlay', e);
             });
 
             google.maps.event.addListener(oCom.options.drawingManager, 'markercomplete', function(e) {
@@ -782,6 +785,7 @@ Version
          */
         _unsubscribeEvents: function () {
             this.target.off('onInitComplete');
+            this.target.off('onAddOverlay');
             this.target.off('onAddMarker');
             this.target.off('onSwitch');
             this.target.off('onOpen');
@@ -797,6 +801,11 @@ Version
             //綁定初始化完成事件接口
             if (typeof (this.options.onInitComplete) === 'function') {
                 this.target.on('onInitComplete', this.options.onInitComplete);
+            }
+
+            //綁定繪圖完畢事件接口
+            if (typeof (this.options.onAddOverlay) === 'function') {
+                this.target.on('onAddOverlay', this.options.onAddOverlay);
             }
 
             //綁定加入Feature事件接口
