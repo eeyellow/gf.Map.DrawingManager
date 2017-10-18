@@ -30,6 +30,7 @@ Version
         targetMap: null,
         toolName: "DrawingManager",
         toolSwitch: true,
+        useGoogleMapContainer: true,
         css: {
             "margin": "10px",
             "border-radius": "3px",
@@ -179,7 +180,9 @@ Version
             oCom.target
                 .css(oCom.options.css);
 
-            oCom.options.targetMap.controls[google.maps.ControlPosition.TOP_LEFT].push(oCom.target[0]);
+            if(oCom.options.useGoogleMapContainer){
+                oCom.options.targetMap.controls[google.maps.ControlPosition.TOP_LEFT].push(oCom.target[0]);
+            }
 
             var html = "";
             oCom.options.btnArr.forEach(function(ele) {
