@@ -2,13 +2,9 @@
 <html lang="zh-TW">
 
 <head>
-    <title></title>
+    <title>數化工具測試頁面</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="./node_modules/admin-lte/bootstrap/css/bootstrap.min.css">
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzV-NzIbe9Lkk7GOKZ50WG7vhxR7qVt0&libraries=drawing"></script>
     <style>
         /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -29,26 +25,15 @@
 
 <body>
     <div id="map"></div>
-    <div id="container_drawingmanager"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXzV-NzIbe9Lkk7GOKZ50WG7vhxR7qVt0&libraries=drawing"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="src/gf.drawingManager.js"></script>
+
     <script>
         var map;
         var myDrawingManager;
         $(function () {
-
-            if ($.cachedScript == undefined) {
-                $.cachedScript = function (url, options) {
-                    // Allow user to set any option except for dataType, cache, and url
-                    options = $.extend(options || {}, {
-                        dataType: "script",
-                        cache: true,
-                        url: url
-                    });
-                    // Use $.ajax() since it is more flexible than $.getScript
-                    // Return the jqXHR object so we can chain callbacks
-                    return $.ajax(options);
-                };
-            }
-
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {
                     lat: 23.98,
@@ -57,11 +42,54 @@
                 zoom: 7
             });
 
-            $.cachedScript("./src/gf.drawingManager.js").done(function () {
-                myDrawingManager = $('#container_drawingmanager').gfMapDrawingManager({
-                    targetMap: map,
-                    toolName: '數化工具'
-                });
+            //加入數化工具的容器
+            var container_drawingmanager = $('<div/>', { id: 'container_drawingmanager'});
+            container_drawingmanager.appendTo($('body'));
+
+            //初始化數化工具
+            myDrawingManager = $('#container_drawingmanager').gfMapDrawingManager({
+                //必要，參數：數化工具綁定的google map instance。
+                targetMap: map,
+                //可選，參數：自定義繪圖模式。
+                mode: ["null", "marker", "polyline", "polygon", "rectangle", "delete", "circle"],
+                //可選，參數：是否使用數化工具開關。
+                toolSwitch: true,
+                //可選，參數：數化工具名稱，會出現在開關上。若toolSwitch=false，則此參數無效
+                toolName: '數化工具',
+                //可選，參數：是否唯讀。
+                readonly: false,
+                //可選，參數：手動設定數化工具容器的CSS樣式。
+                css: {
+
+                },
+                //可選，參數：手動設定數化工具開關容器的CSS樣式。
+                toolSwitchContainerCss: {
+
+                },
+                //可選，參數：手動設定數化工具圖示容器的CSS樣式。
+                iconContainerCss: {
+
+                },
+                //可選，參數：手動設定數化工具圖示的CSS樣式。
+                iconCss: {
+
+                },
+                //可選，事件callback：當初始化完成後觸發。
+                onInitComplete: function(){
+                    debugger;
+                },
+                //可選，事件callback：當繪圖完成後觸發。
+                onAddOverlay: function(e, r){
+                    debugger;
+                },
+                //可選，事件callback：當開啟數化工具開關時觸發。
+                onOpen: function(){
+                    debugger;
+                },
+                //可選，事件callback：當關閉數化工具開關時觸發。
+                onClose: function(){
+                    debugger;
+                }
             });
         });
 
