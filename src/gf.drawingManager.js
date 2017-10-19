@@ -782,17 +782,27 @@ Version
             oCom.options[evtName] = evtCallback;
             oCom._subscribeEvents();
         },
+        _removeEvent: function(evtName){
+            var oCom = this;
+            oCom.options[evtName] = undefined;
+            oCom._subscribeEvents(evtName);
+        },
 
         /**
          * 取消事件註冊
          */
-        _unsubscribeEvents: function () {
-            this.target.off('onInitComplete');
-            this.target.off('onAddOverlay');
-            this.target.off('onAddMarker');
-            this.target.off('onSwitch');
-            this.target.off('onOpen');
-            this.target.off('onClose');
+        _unsubscribeEvents: function (evtName) {
+            if(evtName == undefined){
+                this.target.off('onInitComplete');
+                this.target.off('onAddOverlay');
+                this.target.off('onAddMarker');
+                this.target.off('onSwitch');
+                this.target.off('onOpen');
+                this.target.off('onClose');
+            }
+            else{
+                this.target.off(evtName);
+            }
         },
         /**
          * 綁定事件註冊
@@ -863,6 +873,9 @@ Version
         }
         this.setEvent = function(evtName, evtCallback){
             gfObject._setEvent(evtName, evtCallback);
+        }
+        this.removeEvent = function(evtName){
+            gfObject._removeEvent(evtName)
         }
         this.clear = function(){
             gfObject._clear();
