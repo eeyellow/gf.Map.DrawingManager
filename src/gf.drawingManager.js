@@ -62,7 +62,8 @@ Version
         iconCss: {
             "width": "16px",
             "height": "16px",
-            "position": "relative"
+            "position": "relative",
+            "user-select": "none"
         },
         selectedShape: null,
 
@@ -532,7 +533,7 @@ Version
         },
         /**
          * 設定繪圖模式，參數可為"null", "marker", "polyline", "polygon", "circle", "rectangle"
-         * @param {[type]} mode [description]
+         * @param {Array} mode
          */
         _setDrawingMode: function(mode) {
             var oCom = this;
